@@ -23,4 +23,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 /**
  * Registrate DevResourceController
  */
-Route::resource('photos', 'DevResourceController');
+Route::resource('content', 'DevResourceController');

@@ -23,7 +23,7 @@ class DevResourceController extends Controller
      */
     public function create()
     {
-        echo 'Test create';
+        return view('content.create_post');
     }
 
     /**
