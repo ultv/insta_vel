@@ -23,7 +23,7 @@ class DevResourceController extends Controller
      */
     public function create()
     {
-        retutn "TestCreateFoto";
+        echo 'Test create';
     }
 
     /**
