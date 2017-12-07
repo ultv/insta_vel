@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Posts;
 
 class DevResourceController extends Controller
 {
@@ -34,7 +35,14 @@ class DevResourceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Posts();
+
+        $post->place = $request->place;
+        $post->path = $request->path;
+
+        $post->save();
+
+        return view('content.show');
     }
 
     /**
