@@ -9,6 +9,7 @@ use Illuminate\Http\File;
 
 
 
+
 class DevResourceController extends Controller
 {
     /**
@@ -66,7 +67,8 @@ class DevResourceController extends Controller
                     $request->session()->flash('error', 'Данные не сохранены. Проблемы с файлом.');
                 }
 
-        return view('content.show');
+       // return view('content.show');
+        return redirect()->route('content.show', $post->id);
     }
 
     /**
@@ -77,7 +79,13 @@ class DevResourceController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Posts::find($id);
+
+        return view('content.show')->withPost($post);
+
+
+
+
     }
 
     /**
