@@ -3,6 +3,9 @@
 @section('title', 'Просмотр поста')
 
 @section('place')
-    Show
+    @include('content.msg')
+    
+
+
 
 @endsection

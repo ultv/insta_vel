@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Posts;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
+
+
 
 class DevResourceController extends Controller
 {
@@ -35,12 +39,32 @@ class DevResourceController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Posts();
+      $file = $request->file( 'photo');
 
-        $post->place = $request->place;
-        $post->path = $request->path;
+             if ($file && $file->isValid()) {
 
-        $post->save();
+                $filename = 'images2' . DIRECTORY_SEPARATOR . uniqid('image_',
+                       true) . '.' . $file->extension();
+
+            // Manually specify a file name...
+            Storage::putFileAs('public', $file, $filename);
+
+            $post = new Posts();
+
+            $post->user_id = auth()->id();
+            $post->place = $request->post('place');
+
+            $post->path = 'storage' . DIRECTORY_SEPARATOR . $filename;
+
+            $post->saveOrFail();
+
+            $request->session()->flash('success', 'Данные успешно сохранены');
+
+        } else
+                {
+
+                    $request->session()->flash('error', 'Данные не сохранены. Проблемы с файлом.');
+                }
 
         return view('content.show');
     }
