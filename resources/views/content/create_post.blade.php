@@ -19,8 +19,8 @@
     {{ csrf_field() }}
     <div class ="form-group">
         <div class="col-md-9 col-md-offset-3">
-            {{ Form::file('photo', ['id'=>'photo']) }}
-            {{-- Form::file('photo', ['id'=>'photo','required']) --}}
+            {{ Form::file('photo', ['id'=>'photo', 'accept'=>'image/*', 'required']) }}
+            
         </div>
     </div>
 
