@@ -46,6 +46,22 @@
             <img src="{{ asset($value->path) }}" alt="" width="50%">
             <br>
 
+          <div>
+              <h3>Комментарии:</h3>
+              <div>
+                  @forelse($value->comments as $comment)
+                      <div>
+                          {{ $comment->text }}
+                      </div>
+                  @empty
+                      <p>Нет комментариев.</p>
+                  @endforelse
+
+              </div>
+          </div>
+
+
+
         @empty
             <p>Нет данных для отображения</p>
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Posts;
+use App\Post;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\File;
 
@@ -19,7 +19,7 @@ class DevResourceController extends Controller
      */
     public function index()
     {
-        $post = Posts::orderby('created_at', 'desc')->paginate(10);
+        $post = Post::orderby('created_at', 'desc')->paginate(10);
         return view('content.index')->withPost($post);
     }
 
@@ -51,7 +51,7 @@ class DevResourceController extends Controller
             // Manually specify a file name...
             Storage::putFileAs('public', $file, $filename);
 
-            $post = new Posts();
+            $post = new Post();
 
             $post->user_id = auth()->id();
             $post->place = $request->post('place');
@@ -99,7 +99,7 @@ class DevResourceController extends Controller
 
     // видео посмотреть
     {
-        $post = Posts::find($id);
+        $post = Post::find($id);
         // return view('content.edit')->withPost($post);
 
         return view('content.edit', ['post' => $post]);
@@ -125,7 +125,7 @@ class DevResourceController extends Controller
             // Manually specify a file name...
             Storage::putFileAs('public', $file, $filename);
 
-            $post = Posts::findOrFail($id);
+            $post = Post::findOrFail($id);
 
         //    $post->user_id = auth()->id();
             $post->place = $request->post('place');
@@ -155,7 +155,7 @@ class DevResourceController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $post = Posts::findOrFail($id);
+        $post = Post::findOrFail($id);
         if ($post->user_id == auth()->id()) {
             $post->delete();
             $request->session()->flash('success', 'Данные успешно удалены.');
