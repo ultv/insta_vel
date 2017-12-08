@@ -24,3 +24,5 @@ Route::get('/home', 'HomeController@index')->name('home');
  * Registrate DevResourceController
  */
 Route::resource('content', 'DevResourceController');
+
+Route::resource('comment', 'ComResController');

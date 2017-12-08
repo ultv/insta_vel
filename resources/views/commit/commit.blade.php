@@ -2,20 +2,21 @@
 
 @extends('content.admin_content')
 
-@section('title', 'Просмотр поста')
+@section('title', 'Добавление коммита')
 
 @section('place')
 
+    <?php $id = 2; ?>
 
-    {!! Form::open(['route' => 'DevResourceController@addcommit', 'method'=>'post','enctype'=>'multipart/form-data']) !!}
+    <form action="{{ route('comment.store', ['id' => $id]) }}" method="post" enctype="multipart/form-data" style="...">
 
     <div class ="form-group">
         <div class="col-md-3">
-            {{ Form::label('place', 'Добавление комментария') }}
+            {{ Form::label('name', 'Добавление комментария') }}
         </div>
         <br>
         <div class="col-md-9">
-            {{ Form::text('place', 'Новый комментарий', ['class' => 'form-control']) }}
+            {{ Form::text('text', 'Новый комментарий', ['class' => 'form-control']) }}
         </div>
     </div>
 
@@ -28,7 +29,7 @@
         </div>
     </div>
 
-    {!! Form::close() !!}
+    </form>
 
 
 

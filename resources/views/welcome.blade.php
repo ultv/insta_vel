@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -80,6 +81,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     LaravelDev
+
                 </div>
 
                 <div class="links">

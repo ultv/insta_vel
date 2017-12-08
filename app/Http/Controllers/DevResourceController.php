@@ -80,7 +80,7 @@ class DevResourceController extends Controller
      */
     public function show($id)
     {
-        $post = Posts::findOrFail($id);
+        $post = Post::findOrFail($id);
 
         return view('content.show')->withPost($post);
 
@@ -165,5 +165,22 @@ class DevResourceController extends Controller
 
         return redirect( '/content');
 
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addcommit($id)
+
+        // видео посмотреть
+    {
+   //     $post = Post::find($id);
+        // return view('content.edit')->withPost($post);
+
+   //     return view('content.edit', ['post' => $post]);
     }
 }

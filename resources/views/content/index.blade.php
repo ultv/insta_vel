@@ -15,6 +15,7 @@
 
         @forelse($post as $value)
 
+
           @if(auth()->id() === $value->user_id)
 
 
@@ -48,14 +49,28 @@
 
           <div>
               <h3>Комментарии:</h3>
+
               <div>
+
+
+
                   @forelse($value->comments as $comment)
                       <div>
                           {{ $comment->text }}
+
+
                       </div>
                   @empty
                       <p>Нет комментариев.</p>
                   @endforelse
+
+                <?php  $idtest = 2; ?>
+                      <form action="{{ route('comment.create', ['id' => $idtest]) }}" method="get" style="..." enctype = "multipart/form-data">
+                      {{ csrf_field() }}
+                          <div class="form-group">
+                              <button type="submit" class="btn btn-primary">Добавить комментарий</button>
+                          </div>
+                      </form>
 
               </div>
           </div>
