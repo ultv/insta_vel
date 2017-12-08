@@ -80,7 +80,7 @@ class DevResourceController extends Controller
      */
     public function show($id)
     {
-        $post = Posts::find($id);
+        $post = Posts::findOrFail($id);
 
         return view('content.show')->withPost($post);
 
@@ -100,7 +100,9 @@ class DevResourceController extends Controller
     // видео посмотреть
     {
         $post = Posts::find($id);
-        return view('content.edit')->withPost($post);
+        // return view('content.edit')->withPost($post);
+
+        return view('content.edit', ['post' => $post]);
     }
 
     /**
@@ -110,9 +112,39 @@ class DevResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update (Request $request, $id)
     {
-        //
+
+        $file = $request->file( 'photo');
+
+        if ($file && $file->isValid()) {
+
+            $filename = 'images2' . DIRECTORY_SEPARATOR . uniqid('image_',
+                    true) . '.' . $file->extension();
+
+            // Manually specify a file name...
+            Storage::putFileAs('public', $file, $filename);
+
+            $post = Posts::findOrFail($id);
+
+        //    $post->user_id = auth()->id();
+            $post->place = $request->post('place');
+
+            $post->path = 'storage' . DIRECTORY_SEPARATOR . $filename;
+
+            $post->saveOrFail();
+
+            $request->session()->flash('success', 'Данные обновлены');
+
+        } else
+        {
+
+            $request->session()->flash('error', 'Данные не сохранены. Проблемы с файлом.');
+        }
+
+        // return redirect()->route('content.show', $post->id);
+        return redirect()->route('content.index');
+
     }
 
     /**
@@ -123,7 +155,7 @@ class DevResourceController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $post = Posts::find($id);
+        $post = Posts::findOrFail($id);
         if ($post->user_id == auth()->id()) {
             $post->delete();
             $request->session()->flash('success', 'Данные успешно удалены.');

@@ -16,9 +16,14 @@
         @forelse($post as $value)
 
           @if(auth()->id() === $value->user_id)
+
+
               <br>
-              <a href="{{ route('content.edit', ['post'=>$post]) }}" class="btn btn-primary">Изменить</a>
+              <a href="{{ route('content.edit', ['post'=>$value]) }}" class="btn btn-primary">Изменить</a>
+
               <br>
+
+
                 <form action="{{ route('content.destroy', ['post' => $value]) }}" method="post" style="...">
                     {{ method_field('DELETE') }}
                     {{ csrf_field() }}
@@ -36,7 +41,7 @@
              <br>
              <a href="#"> {{ $value->place }}</a>
              <br>
-             <small> {{ $value->created_at->format('d.m.Y.H:i') }}</small>
+             <small> {{ Carbon\Carbon::parse($value->created_at)->format('d m Y') }}</small>
          </div>
             <img src="{{ asset($value->path) }}" alt="" width="50%">
             <br>

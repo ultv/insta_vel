@@ -1,10 +1,14 @@
 @extends('content.admin_content')
 
-@section('title', 'Изменение записи')
+@section('title', 'Создание записи')
 
 @section('place')
 
-    {!! Form::open(['route' => 'content.store', 'method'=>'post','enctype'=>'multipart/form-data']) !!}
+<div class="col-md-7">
+
+    {!! Form::model($post, array('route'=>array('content.update', $post->id), 'method' => 'PUT',
+     'enctype' => 'multipart/form-data')) !!}
+    <!--{--!! Form::open(['route' => 'content.update', 'method'=>'post','enctype'=>'multipart/form-data']) !!--}-->
 
     <div class ="form-group">
         <div class="col-md-3">
@@ -12,7 +16,7 @@
         </div>
         <br>
         <div class="col-md-9">
-            {{ Form::text('place', $post->place, ['class' => 'form-control']) }}
+            {{ Form::text('place', 'Место съемки', ['class' => 'form-control']) }}
         </div>
     </div>
 
@@ -26,10 +30,11 @@
 
     <div class ="form-group">
         <div class="col-md-9 col-md-offset-3">
-            {{ Form::submit('Сохранить', ['class' => 'btn btn-primary']) }}
+            {{ Form::submit('Сохранить изменения', ['class' => 'btn btn-primary']) }}
         </div>
     </div>
+</div>
 
-    {!! Form::close() !!}
+   {!! Form::close() !!}
 
 @endsection
