@@ -1,6 +1,13 @@
+@extends('layouts.app')
+
+@section('content')
+
 <!doctype html>
 <html lang="ru">
 <head>
+
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content=""width=device-width">
     <title>@yield('title')</title>
@@ -10,7 +17,11 @@
 <body>
     <div class="container">
         <div class="row">
+
+
+
             @yield('place')
+
         </div>
     </div>
 </body>
@@ -18,3 +29,5 @@
 
 
 </html>
+
+@endsection

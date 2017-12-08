@@ -1,3 +1,4 @@
+
 @extends('content.admin_content')
 
 @section('title', 'Создание записи')
