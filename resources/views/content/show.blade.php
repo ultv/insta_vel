@@ -7,11 +7,17 @@
 @section('place')
     @include('content.msg')
 
-    {{ $post->place }}
-    <p>{{ $post->created_at }}</p>
+    <!--foreach ($post as $value)-->
+        <br>
+        {{ $post->place }}
+        <br>
+        {{ $post->created_at }}
+        <br>
+        <img src="{{ asset($post->path) }}">
+
+    <!--endforeach-->
 
 
-    <img src="{{ asset($post->path) }}">
 
 
 

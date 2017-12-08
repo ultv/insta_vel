@@ -7,5 +7,7 @@ use App\User;
 
 class Posts extends Model
 {
-//    return $this->hasOne(related: User::class, foreignKey: 'id', localKey: 'user_id');
+    public function user()   {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

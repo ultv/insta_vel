@@ -19,7 +19,8 @@ class DevResourceController extends Controller
      */
     public function index()
     {
-        //
+        $post = Posts::orderby('created_at', 'desc')->paginate(10);
+        return view('content.index')->withPost($post);
     }
 
     /**
@@ -67,8 +68,8 @@ class DevResourceController extends Controller
                     $request->session()->flash('error', 'Данные не сохранены. Проблемы с файлом.');
                 }
 
-       // return view('content.show');
-        return redirect()->route('content.show', $post->id);
+        // return redirect()->route('content.show', $post->id);
+        return redirect()->route('content.index');
     }
 
     /**
@@ -95,8 +96,11 @@ class DevResourceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+
+    // видео посмотреть
     {
-        //
+        $post = Posts::find($id);
+        return view('content.edit')->withPost($post);
     }
 
     /**
@@ -117,8 +121,17 @@ class DevResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $post = Posts::find($id);
+        if ($post->user_id == auth()->id()) {
+            $post->delete();
+            $request->session()->flash('success', 'Данные успешно удалены.');
+        } else {
+           $request->session()->flash('error', 'Ошибка удаления.');
+        }
+
+        return redirect( '/content');
+
     }
 }

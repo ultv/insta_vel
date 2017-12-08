@@ -1,6 +1,6 @@
 @extends('content.admin_content')
 
-@section('title', 'Создание записи')
+@section('title', 'Изменение записи')
 
 @section('place')
 
@@ -8,12 +8,12 @@
 
     <div class ="form-group">
         <div class="col-md-3">
-            {{ Form::label('place', 'Создание записи') }}
+            {{ Form::label('place', 'Изменение записи') }}
         </div>
         <br>
         <div class="col-md-9">
-                {{ Form::text('place', 'Место съемки', ['class' => 'form-control']) }}
-            </div>
+            {{ Form::text('place', $post->place, ['class' => 'form-control']) }}
+        </div>
     </div>
 
     {{ csrf_field() }}
@@ -30,6 +30,6 @@
         </div>
     </div>
 
-{!! Form::close() !!}
+    {!! Form::close() !!}
 
 @endsection
