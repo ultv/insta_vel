@@ -25,8 +25,7 @@ class ComResController extends Controller
      */
     public function create()
     {
-        // $id = 2;
-        return view('commit/commit');
+        //
     }
 
     /**
@@ -37,47 +36,7 @@ class ComResController extends Controller
      */
     public function store(Request $request)
     {
-
-       // $file = $request->file( 'photo');
-
-     //   if ($file && $file->isValid()) {
-
-    //        $filename = 'images2' . DIRECTORY_SEPARATOR . uniqid('image_',
-    //                true) . '.' . $file->extension();
-
-            // Manually specify a file name...
-    //        Storage::putFileAs('public', $file, $filename);
-
-     //   $post = new Post(); //$post = Post::findOrFail($id);
-
-        $comment = new Comment();
-
-        $comment->author_id = auth()->id();
-
-        //$post->user_id ==
-
-        $comment->post_id = 3; //$request->post->id;
-        $comment->text = $request->text;
-
-      //      $post->user_id = auth()->id();
-      //      $post->place = $request->post('place');
-
-       //     $post->path = 'storage' . DIRECTORY_SEPARATOR . $filename;
-
-        $comment->saveOrFail();
-       //     $post->saveOrFail();
-
-       //     $request->session()->flash('success', 'Данные успешно сохранены');
-
-      //  } else
-      //  {
-
-      //      $request->session()->flash('error', 'Данные не сохранены. Проблемы с файлом.');
-      //  }
-
-        // return redirect()->route('content.show', $post->id);
-
-        return redirect()->route('content.index');
+        //
     }
 
     /**
@@ -100,7 +59,6 @@ class ComResController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        // return view('content.edit')->withPost($post);
 
         return view('commit/commit', ['post' => $post]);
     }
@@ -114,46 +72,15 @@ class ComResController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $file = $request->file( 'photo');
-
-        //   if ($file && $file->isValid()) {
-
-        //        $filename = 'images2' . DIRECTORY_SEPARATOR . uniqid('image_',
-        //                true) . '.' . $file->extension();
-
-        // Manually specify a file name...
-        //        Storage::putFileAs('public', $file, $filename);
-
-        // $post = new Post();
-
-      //  $post = Post::findOrFail($id);
-
         $comment = new Comment();
 
         $comment->author_id = auth()->id();
 
-        //$post->user_id ==
-
-        $comment->post_id = $id; //$post->id;
+        $comment->post_id = $id;
         $comment->text = $request->text;
 
-        //      $post->user_id = auth()->id();
-        //      $post->place = $request->post('place');
-
-        //     $post->path = 'storage' . DIRECTORY_SEPARATOR . $filename;
-
         $comment->saveOrFail();
-        //     $post->saveOrFail();
 
-        //     $request->session()->flash('success', 'Данные успешно сохранены');
-
-        //  } else
-        //  {
-
-        //      $request->session()->flash('error', 'Данные не сохранены. Проблемы с файлом.');
-        //  }
-
-        // return redirect()->route('content.show', $post->id);
         return redirect()->route('content.index');
     }
 
