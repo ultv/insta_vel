@@ -6,9 +6,11 @@
 
 @section('place')
 
-    <?php $id = 2; ?>
 
-    <form action="{{ route('comment.store', ['id' => $id]) }}" method="post" enctype="multipart/form-data" style="...">
+ <!--   <form action="{{-- route('comment.update', ['post' => $post]) --}}"-->
+
+ {!! Form::model($post, array('route'=>array('comment.update', $post->id), 'method' => 'PUT',
+   'enctype' => 'multipart/form-data')) !!}
 
     <div class ="form-group">
         <div class="col-md-3">
@@ -20,7 +22,7 @@
         </div>
     </div>
 
-    {{ csrf_field() }}
+
 
 
     <div class ="form-group">
@@ -29,8 +31,9 @@
         </div>
     </div>
 
-    </form>
+    <!-- /form> -->
 
+ {!! Form::close() !!}
 
 
 @endsection

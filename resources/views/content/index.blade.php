@@ -64,9 +64,9 @@
                       <p>Нет комментариев.</p>
                   @endforelse
 
-                <?php  $idtest = 2; ?>
-                      <form action="{{ route('comment.create', ['id' => $idtest]) }}" method="get" style="..." enctype = "multipart/form-data">
-                      {{ csrf_field() }}
+
+                      <form action="{{ route('comment.edit', ['id' => $value]) }}">
+
                           <div class="form-group">
                               <button type="submit" class="btn btn-primary">Добавить комментарий</button>
                           </div>

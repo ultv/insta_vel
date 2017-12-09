@@ -48,7 +48,7 @@ class ComResController extends Controller
             // Manually specify a file name...
     //        Storage::putFileAs('public', $file, $filename);
 
-        $post = new Post(); //$post = Post::findOrFail($id);
+     //   $post = new Post(); //$post = Post::findOrFail($id);
 
         $comment = new Comment();
 
@@ -56,7 +56,7 @@ class ComResController extends Controller
 
         //$post->user_id ==
 
-        $comment->post_id = 3; //$post->id;
+        $comment->post_id = 3; //$request->post->id;
         $comment->text = $request->text;
 
       //      $post->user_id = auth()->id();
@@ -76,11 +76,6 @@ class ComResController extends Controller
       //  }
 
         // return redirect()->route('content.show', $post->id);
-
-
-
-
-
 
         return redirect()->route('content.index');
     }
@@ -104,7 +99,10 @@ class ComResController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        // return view('content.edit')->withPost($post);
+
+        return view('commit/commit', ['post' => $post]);
     }
 
     /**
@@ -128,7 +126,7 @@ class ComResController extends Controller
 
         // $post = new Post();
 
-        $post = Post::findOrFail($id);
+      //  $post = Post::findOrFail($id);
 
         $comment = new Comment();
 
@@ -136,7 +134,7 @@ class ComResController extends Controller
 
         //$post->user_id ==
 
-        $comment->post_id = $post->id;
+        $comment->post_id = $id; //$post->id;
         $comment->text = $request->text;
 
         //      $post->user_id = auth()->id();
