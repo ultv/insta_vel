@@ -21,6 +21,11 @@ class DevResourceController extends Controller
     public function index()
     {
         $post = Post::orderby('created_at', 'desc')->paginate(10);
+
+        if (!auth()->id()) {
+            session()->flash('error', 'Авторизуйтесь чтобы добавлять посты или комментарии');
+        }
+
         return view('content.index')->withPost($post);
     }
 

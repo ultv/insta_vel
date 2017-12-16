@@ -14,11 +14,7 @@
 
     </style>
 
-    @if (!auth()->id())
 
-        <?php session()->flash('error', 'Авторизуйтесь чтобы добавлять посты или комментарии'); ?>
-
-        @endif
 
     @if (Session::has('success') || Session::has('error'))
         @include('content.msg')
