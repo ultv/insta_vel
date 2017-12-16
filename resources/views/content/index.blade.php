@@ -9,9 +9,14 @@
         @include('content.msg')
     @endif
 
-    <br>
-    <a href="{{ route('content.create', ['post'=>$post]) }}" class="btn btn-primary">Загрузить фото</a>
-    <br>
+
+    @if (auth()->id())
+        <br>
+        <a href="{{ route('content.create', ['post'=>$post]) }}" class="btn btn-primary">Загрузить фото</a>
+        <br>
+    @endif
+
+
 
         @forelse($post as $value)
 
@@ -23,8 +28,6 @@
               <a href="{{ route('content.edit', ['post'=>$value]) }}" class="btn btn-primary">Изменить</a>
 
               <br>
-
-
                 <form action="{{ route('content.destroy', ['post' => $value]) }}" method="post" style="...">
                     {{ method_field('DELETE') }}
                     {{ csrf_field() }}
@@ -32,8 +35,6 @@
                     <button class="btn btn-danger" type="submit">Удалить</button>
                 </form>
           @endif
-
-
 
 
          <div style="...">
@@ -53,35 +54,32 @@
               <div>
 
 
-
                   @forelse($value->comments as $comment)
                       <div>
                           {{ $comment->text }}
-
-
                       </div>
                   @empty
                       <p>Нет комментариев.</p>
                   @endforelse
 
 
-                      <form action="{{ route('comment.edit', ['id' => $value]) }}">
+                  @if (auth()->id())
 
+                      <form action="{{ route('comment.edit', ['id' => $value]) }}">
                           <div class="form-group">
                               <button type="submit" class="btn btn-primary">Добавить комментарий</button>
                           </div>
                       </form>
+                  @endif
 
               </div>
           </div>
-
 
 
         @empty
             <p>Нет данных для отображения</p>
 
         @endforelse
-
 
 
 @endsection
