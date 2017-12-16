@@ -46,10 +46,10 @@ class DevResourceController extends Controller
 
         if ($file && $file->isValid()) {
 
-            $filename = 'images2' . DIRECTORY_SEPARATOR . uniqid('image_',
+            $filename = 'images' . DIRECTORY_SEPARATOR . uniqid('image_',
                     true) . '.' . $file->extension();
 
-            // Manually specify a file name...
+            //
             Storage::putFileAs('public', $file, $filename);
 
             $post = new Post();
@@ -62,6 +62,9 @@ class DevResourceController extends Controller
             $post->saveOrFail();
 
             $request->session()->flash('success', 'Данные успешно сохранены');
+
+
+
 
         } else {
 
@@ -114,10 +117,10 @@ class DevResourceController extends Controller
 
         if ($file && $file->isValid()) {
 
-            $filename = 'images2' . DIRECTORY_SEPARATOR . uniqid('image_',
+            $filename = 'images' . DIRECTORY_SEPARATOR . uniqid('image_',
                     true) . '.' . $file->extension();
 
-            // Manually specify a file name...
+            //
             Storage::putFileAs('public', $file, $filename);
 
             $post = Post::findOrFail($id);
@@ -157,8 +160,18 @@ class DevResourceController extends Controller
         $post->comments()->delete();
 
         if ($post->user_id == auth()->id()) {
-            $post->delete();
-            $request->session()->flash('success', 'Данные успешно удалены.');
+
+            // до удаления поста удалим фото с сервера - не работает!!!
+
+            return ($post->path);
+            // $f = Storage::disk('public');
+            // $f->delete($post->path);
+            // if(Storage::delete($post->path))
+                // Storage::delete('G:/1.txt');
+                // и удалим пост
+                $post->delete();
+                $request->session()->flash('success', 'Данные успешно удалены.');
+
         } else {
             $request->session()->flash('error', 'Ошибка удаления.');
         }

@@ -5,54 +5,62 @@
 
 @section('place')
 
+
+    <style>
+
+
+
+
+
+    </style>
+
+    @if (!auth()->id())
+
+        <?php session()->flash('error', 'Авторизуйтесь чтобы добавлять посты или комментарии'); ?>
+
+        @endif
+
     @if (Session::has('success') || Session::has('error'))
         @include('content.msg')
     @endif
 
 
+
     @if (auth()->id())
-        <br>
+
         <a href="{{ route('content.create', ['post'=>$post]) }}" class="btn btn-primary">Загрузить фото</a>
         <br>
     @endif
+<table class = "table table-bordered">
+    <tr>
+        <td>Лента</td>
+    </tr>
 
-
-
+    <tbody>
         @forelse($post as $value)
 
-
+        <tr><td align = "center">
           @if(auth()->id() === $value->user_id)
-
-
-              <br>
-              <a href="{{ route('content.edit', ['post'=>$value]) }}" class="btn btn-primary">Изменить</a>
-
-              <br>
+              <br><a href="{{ route('content.edit', ['post'=>$value]) }}" class="btn btn-primary">Изменить</a><br>
                 <form action="{{ route('content.destroy', ['post' => $value]) }}" method="post" style="...">
                     {{ method_field('DELETE') }}
                     {{ csrf_field() }}
-                    <br>
-                    <button class="btn btn-danger" type="submit">Удалить</button>
+                    <br><button class="btn btn-danger" type="submit">Удалить</button>
                 </form>
           @endif
 
-
          <div style="...">
-
-             <a href = "#">{{ '@' . $value->user->name }}</a>
-             <br>
-             <a href="#"> {{ $value->place }}</a>
-             <br>
+             <a href = "#">{{ '@' . $value->user->name }}</a><br>
+             <a href="#"> {{ $value->place }}</a><br>
              <small> {{ Carbon\Carbon::parse($value->created_at)->format('d m Y') }}</small>
          </div>
-            <img src="{{ asset($value->path) }}" alt="" width="50%">
-            <br>
+
+          <img src="{{ asset($value->path) }}" alt="" width="50%"><br>
+
 
           <div>
               <h3>Комментарии:</h3>
-
               <div>
-
 
                   @forelse($value->comments as $comment)
                       <div>
@@ -62,9 +70,7 @@
                       <p>Нет комментариев.</p>
                   @endforelse
 
-
                   @if (auth()->id())
-
                       <form action="{{ route('comment.edit', ['id' => $value]) }}">
                           <div class="form-group">
                               <button type="submit" class="btn btn-primary">Добавить комментарий</button>
@@ -78,8 +84,9 @@
 
         @empty
             <p>Нет данных для отображения</p>
-
-        @endforelse
-
+            </td></tr>
+    @endforelse
+    </tbody>
+</table>
 
 @endsection
