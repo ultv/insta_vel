@@ -1,3 +1,4 @@
+<!-- extends('content.index') -->
 
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
@@ -81,6 +82,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     LaravelDev
+                   <!-- yield('place')-->
 
                 </div>
 

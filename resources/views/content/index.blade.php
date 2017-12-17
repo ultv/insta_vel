@@ -20,8 +20,9 @@
             @endif
 
             @if (auth()->id())
+                <div style = "margin: 0px 0px 20px 0px;">
                 <a href="{{ route('content.create', ['post'=>$post]) }}" class="btn btn-primary">Загрузить фото</a>
-                <br>
+                </div>
             @endif
 
             <table class = "table"> <!-- таблица постов -->
@@ -36,7 +37,7 @@
                         <td align = "center" bgcolor = "white"> <!-- Пост -->
 
                             <table> <!-- расположенее кнопок -->
-                                <rt>
+                                <tr>
                                     <td width = "400">
                                         <div class = "pull-left">
                                             <a href = "#">{{ '@' . $value->user->name }}</a><br>
@@ -44,7 +45,6 @@
                                             <small> {{ Carbon\Carbon::parse($value->created_at)->format('d m Y') }}</small>
                                         </div>
                                     </td>
-
 
                                     @if(auth()->id() === $value->user_id)
                                         <td width = "100">
@@ -61,7 +61,7 @@
                                             </form>
                                         </td>
                                     @endif
-                                </rt>
+                                </tr>
                             </table> <!-- расположенее кнопок -->
 
                             <img src="{{ asset($value->path) }}" alt="" width="100%"><br>
@@ -96,7 +96,6 @@
                         </td> <!-- Пост -->
                     </tr> <!-- Пост -->
                 @endforelse
-
 
             </table> <!-- таблица постов -->
 

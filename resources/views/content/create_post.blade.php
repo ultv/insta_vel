@@ -6,29 +6,43 @@
 
     {!! Form::open(['route' => 'content.store', 'method'=>'post','enctype'=>'multipart/form-data']) !!}
 
-    <div class ="form-group">
-        <div class="col-md-3">
-            {{ Form::label('place', 'Создание записи') }}
-        </div>
-        <br>
-        <div class="col-md-9">
-                {{ Form::text('place', 'Место съемки', ['class' => 'form-control']) }}
-            </div>
-    </div>
+<table>
+    <tr>
+        <td width = "250"></td> <!-- пустая колонка слева -->
 
-    {{ csrf_field() }}
-    <div class ="form-group">
-        <div class="col-md-9 col-md-offset-3">
-            {{ Form::file('photo', ['id'=>'photo', 'accept'=>'image/*', 'required']) }}
 
-        </div>
-    </div>
+        <td width = "700" bgcolor = "white">
+            <table class = "table table-bordered">
+                <tr>
+                    <td>
+                        {{ Form::label('place', 'Создание записи') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style = "margin: 20px 0px 20px 0px;">
+                            {{ Form::text('place', 'Место съемки:', ['class' => 'form-control']) }}
+                        </div>
 
-    <div class ="form-group">
-        <div class="col-md-9 col-md-offset-3">
-            {{ Form::submit('Сохранить', ['class' => 'btn btn-primary']) }}
-        </div>
-    </div>
+                        {{ csrf_field() }}
+
+                        {{ Form::label('place', 'Фотография:') }}
+
+                        <div style = "margin: 0px 0px 0px 0px;">
+                            {{ Form::file('photo', ['id'=>'photo', 'accept'=>'image/*', 'required']) }}
+                        </div>
+
+                        <div style = "margin: 20px 0px 20px 0px;">
+                            {{ Form::submit('Сохранить', ['class' => 'btn btn-primary']) }}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+
+        <td width = "250"></td> <!-- пустая колонка справа -->
+    </tr>
+</table>
 
 {!! Form::close() !!}
 
