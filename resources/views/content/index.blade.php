@@ -35,20 +35,34 @@
                     <tr> <!-- Пост -->
                         <td align = "center" bgcolor = "white"> <!-- Пост -->
 
-                            <div style="...">
-                                <a href = "#">{{ '@' . $value->user->name }}</a><br>
-                                <a href="#"> {{ $value->place }}</a><br>
-                                <small> {{ Carbon\Carbon::parse($value->created_at)->format('d m Y') }}</small>
-                            </div>
+                            <table> <!-- расположенее кнопок -->
+                                <rt>
+                                    <td width = "400">
+                                        <div class = "pull-left">
+                                            <a href = "#">{{ '@' . $value->user->name }}</a><br>
+                                            <a href="#"> {{ $value->place }}</a><br>
+                                            <small> {{ Carbon\Carbon::parse($value->created_at)->format('d m Y') }}</small>
+                                        </div>
+                                    </td>
 
-                            @if(auth()->id() === $value->user_id)
-                                <br><a href="{{ route('content.edit', ['post'=>$value]) }}" class="btn btn-primary">Изменить</a><br>
-                                <form action="{{ route('content.destroy', ['post' => $value]) }}" method="post" style="...">
-                                    {{ method_field('DELETE') }}
-                                    {{ csrf_field() }}
-                                    <br><button class="btn btn-danger" type="submit">Удалить</button>
-                                </form>
-                            @endif
+
+                                    @if(auth()->id() === $value->user_id)
+                                        <td width = "100">
+                                            <a href="{{ route('content.edit', ['post'=>$value]) }}" class="btn btn-primary">Изменить</a>
+                                        </td>
+
+                                        <td>
+                                            <form action="{{ route('content.destroy', ['post' => $value]) }}" method="post" style="...">
+                                                {{ method_field('DELETE') }}
+                                                {{ csrf_field() }}
+                                                <div class = "pull-right">
+                                                    <button class="btn btn-danger" type="submit">Удалить</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    @endif
+                                </rt>
+                            </table> <!-- расположенее кнопок -->
 
                             <img src="{{ asset($value->path) }}" alt="" width="100%"><br>
 

@@ -168,7 +168,7 @@ class DevResourceController extends Controller
 
             // до удаления поста удалим фото с сервера - не работает!!!
 
-            return ($post->path);
+        //    return ($post->path); // test
             // $f = Storage::disk('public');
             // $f->delete($post->path);
             // if(Storage::delete($post->path))
