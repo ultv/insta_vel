@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('/', function () {
+ /* Route::get('/', function () {
     return view('welcome');
-});
+}); */
+
+
+/**
+ * Пропускаем страницу welcome и сразу выводим контент
+ */
+Route::get('/', 'DevResourceController@index');
 
 Auth::routes();
 
