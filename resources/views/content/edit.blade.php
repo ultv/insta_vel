@@ -36,8 +36,11 @@
                         </div>
 
                         {{ csrf_field() }}
+
+                        <img src="{{ asset($post->path) }}" alt="" width="100%"><br>
+
                         <div style = "margin: 20px 0px 20px 0px;">
-                            {{ Form::file('photo', ['id'=>'photo', 'accept'=>'image/*', 'required']) }}
+                            {{ Form::file('photo', ['id'=>'photo', 'accept'=>'image/*']) }}
                         </div>
 
                         <div style = "margin: 20px 0px 20px 0px;">
@@ -47,8 +50,6 @@
 
                     </td>
                 </tr>
-
-
 
             </table>
 

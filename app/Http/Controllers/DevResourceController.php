@@ -114,22 +114,24 @@ class DevResourceController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
+     *
+     * Считаем, что при редактировании исходное фото уже есть и обрабатывалось на ошибки.
+     * Если пользователь выбрал новое фото - выполняем полный механизм сохранения.
+     * Если фото без изменений меняем только название поста.
      */
     public function update(Request $request, $id)
     {
 
-        $file = $request->file('photo');
+         $file = $request->file('photo');
 
-        if ($file && $file->isValid()) {
+         if ($file && $file->isValid()) {
 
             $filename = 'images' . DIRECTORY_SEPARATOR . uniqid('image_',
                     true) . '.' . $file->extension();
 
-            //
             Storage::putFileAs('public', $file, $filename);
 
             $post = Post::findOrFail($id);
-
 
             $post->place = $request->post('place');
 
@@ -139,11 +141,20 @@ class DevResourceController extends Controller
 
             $request->session()->flash('success', 'Данные обновлены');
 
-        } else {
+         } else {
 
-            $request->session()->flash('error', 'Данные не сохранены. Проблемы с файлом.');
+             $post = Post::findOrFail($id);
+
+             if ($post->place != $request->post('place')) {
+
+                $post->place = $request->post('place');
+
+                $post->saveOrFail();
+
+                $request->session()->flash('success', 'Данные обновлены');
+             }
+
         }
-
 
         return redirect()->route('content.index');
 
