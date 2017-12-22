@@ -9,7 +9,7 @@
 
 </style>
 
-<table> <!-- таблица колонок страницы -->
+<table > <!-- таблица колонок страницы -->
     <tr>
         <td width = "250"></td> <!-- пустая колонка слева -->
 
@@ -25,7 +25,7 @@
                 </div>
             @endif
 
-            <table class = "table"> <!-- таблица постов -->
+            <table class = "table table-bordered"> <!-- таблица постов -->
                 <tr>
                     <td bgcolor = "white">Лента</td>
                 </tr>
@@ -34,16 +34,14 @@
                 @forelse($post as $value)
 
                     <tr> <!-- Пост -->
-                        <td align = "center" bgcolor = "white"> <!-- Пост -->
+                        <td bgcolor = "white"> <!-- Пост -->
 
                             <table> <!-- расположенее кнопок -->
                                 <tr>
-                                    <td width = "400">
-                                        <div class = "pull-left">
-                                            <a href = "#">{{ '@' . $value->user->name }}</a><br>
-                                            <a href="#"> {{ $value->place }}</a><br>
-                                            <small> {{ Carbon\Carbon::parse($value->created_at)->format('d m Y') }}</small>
-                                        </div>
+                                    <td width = "450">
+                                        <a href = "#">{{ '@' . $value->user->name }}</a><br>
+                                        <a href="#"> {{ $value->place }}</a><br>
+                                        <small> {{ Carbon\Carbon::parse($value->created_at)->format('d m Y') }}</small>
                                     </td>
 
                                     @if(auth()->id() === $value->user_id)
@@ -80,7 +78,7 @@
 
                                     @if (auth()->id())
                                         <form action="{{ route('comment.edit', ['id' => $value]) }}">
-                                            <div class="form-group">
+                                            <div style = "margin: 20px 0px 10px 0px;" >
                                                 <button type="submit" class="btn btn-primary">Добавить комментарий</button>
                                             </div>
                                         </form>
