@@ -38,7 +38,10 @@
 
                             <table> <!-- расположенее кнопок -->
                                 <tr>
-                                    <td width = "450">
+                                    <td width = "50">
+                                        <img src="{{ asset('storage' . $value->user->avatar) }}" class="img-circle" alt="" width="90%">
+                                    </td>
+                                    <td width = "400">
                                         <a href = "#">{{ '@' . $value->user->name }}</a><br>
                                         <a href="#"> {{ $value->place }}</a><br>
                                         <small> {{ Carbon\Carbon::parse($value->created_at)->format('d m Y') }}</small>

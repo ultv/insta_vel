@@ -9,7 +9,7 @@
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <form class="form-horizontal" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <label for="avatar" class="col-md-4 control-label">Аватар</label>
                             <div class="col-md-6">
-                                <input type = "file", id = "avatar", accept = "image/*",>
+                                <input type = "file" id = "avatar" name = "avatar" accept = "image/*">
                             </div>
                         </div>
 
