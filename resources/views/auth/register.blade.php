@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -60,6 +61,16 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+
+
+                        <!-- Добавляем в регистрацию Аватар -->
+                        <div class="form-group">
+                            <label for="avatar" class="col-md-4 control-label">Аватар</label>
+                            <div class="col-md-6">
+                                <input type = "file", id = "avatar", accept = "image/*",>
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
