@@ -54,7 +54,6 @@ class DevResourceController extends Controller
             $filename = 'images' . DIRECTORY_SEPARATOR . uniqid('image_',
                     true) . '.' . $file->extension();
 
-            //
             Storage::putFileAs('public', $file, $filename);
 
             $post = new Post();
@@ -67,9 +66,6 @@ class DevResourceController extends Controller
             $post->saveOrFail();
 
             $request->session()->flash('success', 'Данные успешно сохранены');
-
-
-
 
         } else {
 
@@ -169,24 +165,24 @@ class DevResourceController extends Controller
     public function destroy(Request $request, $id)
     {
 
-        // Сначала удаляем комменты
+        // Сначала удаляем комменты. Можно реализовать через cascade в связи таблиц.
 
         $post = Post::findOrFail($id);
-
         $post->comments()->delete();
 
         if ($post->user_id == auth()->id()) {
 
-            // до удаления поста удалим фото с сервера - не работает!!!
+        // до удаления поста удалим фото с сервера
+        // из пути файла удаляем 'storage'
 
-        //    return ($post->path); // test
-            // $f = Storage::disk('public');
-            // $f->delete($post->path);
-            // if(Storage::delete($post->path))
-                // Storage::delete('G:/1.txt');
-                // и удалим пост
-                $post->delete();
-                $request->session()->flash('success', 'Данные успешно удалены.');
+            $f = Storage::disk('public');
+            $path = $post->path;
+            $deletePath = preg_replace('/storage/', '', $path);
+            $f->delete($deletePath);
+
+            // и удалим пост
+            $post->delete();
+            $request->session()->flash('success', 'Данные успешно удалены.');
 
         } else {
             $request->session()->flash('error', 'Ошибка удаления.');
